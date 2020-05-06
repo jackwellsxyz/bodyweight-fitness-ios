@@ -2,7 +2,7 @@ import Quick
 import Nimble
 import RealmSwift
 
-@testable import Bodyweight_Fitness
+@testable import BodyweightFitness
 
 class RepositoryRoutineCompanionSpec: QuickSpec {
     func mockDate(from: String) -> Date {

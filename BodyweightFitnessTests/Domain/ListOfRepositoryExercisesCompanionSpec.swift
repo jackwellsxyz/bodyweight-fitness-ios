@@ -2,7 +2,7 @@ import Quick
 import Nimble
 import RealmSwift
 
-@testable import Bodyweight_Fitness
+@testable import BodyweightFitness
 
 class ListOfRepositoryExercisesCompanionSpec: QuickSpec {
     override func spec() {

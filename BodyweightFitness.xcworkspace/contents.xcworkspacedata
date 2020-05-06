@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:BodyweightFitness.xcodeproj">
+      location = "group:/Users/jack/dev/bodyweight-fitness-ios/BodyweightFitness.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
