@@ -1,7 +1,7 @@
 import Foundation
 import XCTest
 
-@testable import Bodyweight_Fitness
+@testable import BodyweightFitness
 
 class TestRoutine {
     var id = "Routine-" + UUID().uuidString

@@ -24,3 +24,5 @@ DerivedData
 Carthage/
 Carthage/Build
 Cartfile.resolved
+
+GoogleService-Info.plist

@@ -1,6 +1,7 @@
 import UIKit
 import StoreKit
-import Crashlytics
+import FirebaseAnalytics
+//import Crashlytics
 
 extension SKProduct {
     func localizedPrice() -> String {
@@ -59,7 +60,7 @@ class SupportDeveloperViewController: UIViewController, SKPaymentTransactionObse
             product = products[0]
 
             if let product = product {
-                buyButton.setTitle("Buy \(product.localizedPrice())", for: UIControlState())
+                buyButton.setTitle("Buy \(product.localizedPrice())", for: UIControl.State())
             }
             
             self.buyButton.isEnabled = true
@@ -77,14 +78,22 @@ class SupportDeveloperViewController: UIViewController, SKPaymentTransactionObse
                 self.purchased()
                 
                 if let product = product {
-                    Answers.logPurchase(
-                        withPrice: product.price,
-                        currency: product.currency(),
-                        success: true,
-                        itemName: "Bodyweight Fitness Gold",
-                        itemType: "IAP",
-                        itemId: "bodyweight.fitness.gold",
-                        customAttributes: nil)
+//                    Answers.logPurchase(
+//                        withPrice: product.price,
+//                        currency: product.currency(),
+//                        success: true,
+//                        itemName: "Bodyweight Fitness Gold",
+//                        itemType: "IAP",
+//                        itemId: "bodyweight.fitness.gold",
+//                        customAttributes: nil)
+                    Analytics.logEvent("AnalyticsEventEcommercePurchase", parameters: [
+                        AnalyticsParameterPrice: product.price,
+                        AnalyticsParameterCurrency: product.currency(),
+                        AnalyticsParameterSuccess: true,
+                        AnalyticsParameterItemName: "Bodyweight Fitness Gold",
+                        AnalyticsParameterPaymentType: "IAP",
+                        AnalyticsParameterItemID: "bodyweight.fitness.gold"
+                    ])
                 }
                 
                 SKPaymentQueue.default().finishTransaction(transaction)
@@ -101,7 +110,7 @@ class SupportDeveloperViewController: UIViewController, SKPaymentTransactionObse
     }
     
     func purchased() {
-        self.buyButton.setTitle("Purchased, thank you!", for: UIControlState())
+        self.buyButton.setTitle("Purchased, thank you!", for: UIControl.State())
         self.buyButton.isEnabled = false
         
         self.restorePurchasesButton.isHidden = true
@@ -114,7 +123,7 @@ class SupportDeveloperViewController: UIViewController, SKPaymentTransactionObse
             preferredStyle: .alert
         )
         
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
     }

@@ -1,16 +1,15 @@
 import UIKit
 import CoreData
-import Fabric
-import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        Fabric.with([Crashlytics.self])
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        Fabric.with([Crashlytics.self])
+        FirebaseApp.configure()
 
         self.migrateSchemaIfNeeded()
         self.setDefaultSettings()
@@ -61,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let realm = RepositoryStream.sharedInstance.getRealm()
                 
                 try! realm.write {
-                    realm.add(newSchema, update: false)
+                    realm.add(newSchema, update: .all)
                     realm.delete(currentSchema)
                 }
             }
